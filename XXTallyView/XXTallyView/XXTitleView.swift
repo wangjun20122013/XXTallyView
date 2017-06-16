@@ -116,6 +116,11 @@ extension XXTitleView{
             }
             
             label.frame = CGRect(x: x, y: y, width: w, height: h)
+            // 开启缩放的情况下第一个title缩放
+            if i == 0 {
+                let scale = style.isScale ? style.scaleRange : 1.0
+                label.transform = CGAffineTransform(scaleX: scale, y: scale)
+            }
         }
         scrollView.contentSize = style.isScrollEnable ? CGSize(width: titleLabels.last!.frame.maxX + style.itemMargin * 0.5, height: 0) : CGSize.zero
     }
@@ -159,6 +164,11 @@ extension XXTitleView{
             }
             scrollView.setContentOffset(CGPoint(x: offestX, y: 0), animated: true)
         }
+        // label点击放大
+        if style.isScale{
+            sourceLabel.transform = CGAffineTransform.identity
+            targetLabel.transform = CGAffineTransform(scaleX: style.scaleRange, y: style.scaleRange)
+        }
     }
 }
 
@@ -185,6 +195,12 @@ extension XXTitleView: XXContentViewDelegate{
             
             bottomLine.frame.origin.x = sourceLabel.frame.origin.x + deltaX * progress
             bottomLine.frame.size.width = sourceLabel.frame.width + deltaW * progress
+        }
+        //label放大
+        if style.isScale{
+            let scaleD = (style.scaleRange - 1.0) * progress
+            sourceLabel.transform = CGAffineTransform(scaleX: style.scaleRange - scaleD, y: style.scaleRange - scaleD)
+            targetLabel.transform = CGAffineTransform(scaleX: 1.0 + scaleD, y:  1.0 + scaleD)
         }
         
     }

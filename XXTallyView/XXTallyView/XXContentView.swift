@@ -124,7 +124,7 @@ extension XXContentView : UICollectionViewDelegate{
                 progress = 1
             }
         }
-        print(progress)
+//        print(progress)
         //通知代理
         delegate?.contentView(self, targetIndex: targetIndex, progress: progress)
     }

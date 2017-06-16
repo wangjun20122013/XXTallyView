@@ -30,5 +30,11 @@ class XXTitleStyle {
     /// line的北京颜色
     var scrollLineColor : UIColor = .orange
     
+    ///是否缩放显示
+    var isScale : Bool = true
+    ///缩放的倍数
+    var scaleRange : CGFloat = 1.2
+    
+    
     
 }
